@@ -1,36 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-  labels:
-    app: exoplanets
-  name: exoplanets
+  name: test
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: exoplanets
+      app: hello-world-nginx
   template:
     metadata:
       labels:
-        app: exoplanets
+        app: hello-world-nginx
     spec:
       containers:
-      - env:
-        - name: DB_HOST
-          value: cockroachdb1-public
-        - name: DB_NAME
-          value: postgres
-        - name: DB_PORT
-          value: "26257"
-        - name: DB_USER
-          value: root
-        image: quay.io/redhattraining/exoplanets:v1.1.1
-        name: exoplanets
+      - image: quay.io/redhattraining/hello-world-nginx:v1.0
+        name: hello-world-nginx
+        resources:
+          limits:
+            memory: 2Gi
+
+
         ports:
-        - containerPort: 8080
-          protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
+        - containerPort: 80
+          name: http
