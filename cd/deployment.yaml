@@ -13,7 +13,7 @@ spec:
         app: hello-world-nginx
     spec:
       containers:
-      - image: quay.io/redhattraining/hello-world-nginx:v1.0
+      - image: quay.io/redhattraining/hello-nginx:v1.0
         name: hello-world-nginx
         resources:
           limits:
